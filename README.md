@@ -96,6 +96,11 @@ Final Project/
 ### 🏠 Homepage
 ![Homepage](./Home_page.png)
 
+### 📊 Dashboard
+![Dashboard](./FinalProject/Post_New_Auction)
+
+### 📝 Post Auction
+![Post Auction](./frontend/public/images/post_auction_screenshot.png)
 
 
 ---
