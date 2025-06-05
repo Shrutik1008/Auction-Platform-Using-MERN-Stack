@@ -93,7 +93,8 @@ Final Project/
 
 ## 📸 Screenshots
 
-_Add some screenshots of login, auction page, bidding page, etc._
+**Login Page**
+
 
 ---
 
