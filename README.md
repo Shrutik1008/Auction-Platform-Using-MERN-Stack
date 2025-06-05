@@ -8,7 +8,7 @@ A full-stack **Online Auction Platform** built using the **MERN stack** (MongoDB
 ## 🔧 Tech Stack
 
 - **Frontend**: React
-- **Backend**: Node.js, Express.js
+- **Backend**: Node.js
 - **Database**: MongoDB (with Mongoose)
 - **Authentication**: JWT (JSON Web Tokens)
 - **Other Tools**: CORS, Bcrypt.js, dotenv
