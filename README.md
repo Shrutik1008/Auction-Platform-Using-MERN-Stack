@@ -94,7 +94,7 @@ Final Project/
 ## 📸 Screenshots
 
 ### 🏠 Homepage
-![Homepage](./Screenshot 2025-06-05 135905.png)
+![Homepage](./Home_page.png)
 
 
 
