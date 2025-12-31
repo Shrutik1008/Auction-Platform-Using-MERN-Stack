@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
-const API_URL = process.env.REACT_APP_API_URL; // ✅ ENV VARIABLE
+const API_URL = process.env.REACT_APP_API_URL;
 
 function AuctionItem() {
   const { id } = useParams();
@@ -12,7 +12,9 @@ function AuctionItem() {
   const [bid, setBid] = useState("");
   const [message, setMessage] = useState("");
   const [loggedInUserId, setLoggedInUserId] = useState(null);
-  const [timeLeft, setTimeLeft] = useState("");
+  const [timeLeft, setTimeLeft] = useState("Loading...");
+
+  const timerRef = useRef(null); // ✅ important
 
   // 🔐 Decode userId from JWT
   const getUserIdFromToken = () => {
@@ -32,10 +34,9 @@ function AuctionItem() {
     const fetchItem = async () => {
       try {
         setLoggedInUserId(getUserIdFromToken());
-
         const res = await axios.get(`${API_URL}/auctions/${id}`);
         setItem(res.data);
-      } catch (error) {
+      } catch {
         setMessage("Error fetching auction item");
       }
     };
@@ -43,18 +44,19 @@ function AuctionItem() {
     fetchItem();
   }, [id]);
 
-  // ⏳ COUNTDOWN TIMER
+  // ⏳ STABLE COUNTDOWN TIMER (FIXED)
   useEffect(() => {
     if (!item.closingTime) return;
 
-    const timer = setInterval(() => {
+    const closingTimestamp = new Date(item.closingTime).getTime();
+
+    const updateTimer = () => {
       const now = Date.now();
-      const end = new Date(item.closingTime).getTime();
-      const diff = end - now;
+      const diff = closingTimestamp - now;
 
       if (diff <= 0) {
         setTimeLeft("Auction Closed");
-        clearInterval(timer);
+        clearInterval(timerRef.current);
         return;
       }
 
@@ -63,9 +65,12 @@ function AuctionItem() {
       const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
       setTimeLeft(`${hrs}h ${mins}m ${secs}s`);
-    }, 1000);
+    };
 
-    return () => clearInterval(timer);
+    updateTimer(); // ⏱️ run immediately
+    timerRef.current = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(timerRef.current);
   }, [item.closingTime]);
 
   // 💰 Place bid
@@ -138,7 +143,6 @@ function AuctionItem() {
         Time Left: {timeLeft}
       </p>
 
-      {/* Bidding */}
       {!auctionClosed && (
         <>
           <input
@@ -152,7 +156,6 @@ function AuctionItem() {
         </>
       )}
 
-      {/* OWNER ACTIONS */}
       {isOwner && (
         <div style={{ marginTop: "20px" }}>
           <button onClick={handleEdit}>Edit</button>
