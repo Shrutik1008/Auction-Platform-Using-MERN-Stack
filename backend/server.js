@@ -89,12 +89,15 @@ app.post("/AuctionItem", authenticate, async (req, res) => {
     if (!itemName || !description || !startingBid || !closingTime)
       return res.status(400).json({ message: "All fields are required" });
 
+    // ✅ FIX: FORCE UTC STORAGE
+    const closingTimeUTC = new Date(closingTime).toISOString();
+
     const auction = new AuctionItem({
       itemName,
       description,
       currentBid: startingBid,
       highestBidder: "",
-      closingTime,
+      closingTime: closingTimeUTC, // ✅ FIXED
       owner: req.user.userId
     });
 
