@@ -27,7 +27,7 @@ function PostAuction() {
           itemName,
           description,
           startingBid: Number(startingBid),
-          closingTime
+          closingTime: new Date(closingTime).toISOString() // ✅ FIX
         },
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -45,10 +45,35 @@ function PostAuction() {
     <div className="form-container">
       <h2>Post New Auction</h2>
       <form onSubmit={handlePostAuction}>
-        <input value={itemName} onChange={e => setItemName(e.target.value)} required />
-        <textarea value={description} onChange={e => setDescription(e.target.value)} required />
-        <input type="number" value={startingBid} onChange={e => setStartingBid(e.target.value)} required />
-        <input type="datetime-local" value={closingTime} onChange={e => setClosingTime(e.target.value)} required />
+        <input
+          value={itemName}
+          onChange={e => setItemName(e.target.value)}
+          placeholder="Item name"
+          required
+        />
+
+        <textarea
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+          placeholder="Description"
+          required
+        />
+
+        <input
+          type="number"
+          value={startingBid}
+          onChange={e => setStartingBid(e.target.value)}
+          placeholder="Starting bid"
+          required
+        />
+
+        <input
+          type="datetime-local"
+          value={closingTime}
+          onChange={e => setClosingTime(e.target.value)}
+          required
+        />
+
         <button type="submit">Post Auction</button>
       </form>
     </div>
