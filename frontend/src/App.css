@@ -10,7 +10,7 @@
 
 /* BODY */
 body {
-  background: url('/auction.jpeg') no-repeat center center fixed,
+  background: url('./auction.jpeg') no-repeat center center fixed,
               rgba(213, 216, 220, 0.7);
   background-size: cover;
   color: #2E4053;
