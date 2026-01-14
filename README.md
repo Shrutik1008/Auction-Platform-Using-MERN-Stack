@@ -6,7 +6,7 @@ A full-stack **Online Auction Platform** built using the **MERN stack** (MongoDB
 ---
 ## 🌐 Live Demo
 
-🚀 **Go Live:** https://auctionplatformweb.netlify.app/ 
+🚀 **Go Live:** https://auctionplatformweb.netlify.app
 
 > Experience the Auction Platform in real time — create auctions, place bids, and track live updates.
 
