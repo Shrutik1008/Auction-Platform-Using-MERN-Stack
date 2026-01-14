@@ -4,6 +4,11 @@
 A full-stack **Online Auction Platform** built using the **MERN stack** (MongoDB, Express.js, React, Node.js). This application allows users to register, log in, create and manage auction listings, and place bids in real time.
 
 ---
+## 🌐 Live Demo
+
+🚀 **Go Live:** https://auctionplatformweb.netlify.app/ 
+
+> Experience the Auction Platform in real time — create auctions, place bids, and track live updates.
 
 ## 🔧 Tech Stack
 
